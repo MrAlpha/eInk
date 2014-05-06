@@ -80,5 +80,8 @@ __interrupt void USCI0RX_ISR_HOOK(void)
 	// USCI_A0 TX buffer ready?
 	while (!(IFG2 & UCA0TXIFG)); // Poll TXIFG to until set
 	UCA0TXBUF = UCA0RXBUF;       // TX -> RXed character
+
+	//P1OUT ^= (1<<0x00);
+
     /* USER CODE END (section: USCI0RX_ISR_HOOK) */
 }

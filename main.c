@@ -2,6 +2,7 @@
  * ======== Standard MSP430 includes ========
  */
 #include <msp430.h>
+#include "pinDefine.h"
 
 /*
  * ======== Grace related declaration ========
@@ -18,6 +19,8 @@ int main( void )
    // UCA0RXIE
     while(1){
     // >>>>> Fill-in user code here <<<<<
+    P1OUT |= (1<<pin0);
+    P1OUT |= (1<<pin6);
     }
     return (0);
 }
