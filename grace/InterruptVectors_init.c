@@ -20,7 +20,8 @@
 #include <msp430.h>
 
 /* USER CODE START (section: InterruptVectors_init_c_prologue) */
-/* User defined includes, defines, global variables and functions */
+#include "..\global.h"
+
 /* USER CODE END (section: InterruptVectors_init_c_prologue) */
 
 /*
@@ -80,6 +81,9 @@ __interrupt void USCI0RX_ISR_HOOK(void)
 	// USCI_A0 TX buffer ready?
 	while (!(IFG2 & UCA0TXIFG)); // Poll TXIFG to until set
 	UCA0TXBUF = UCA0RXBUF;       // TX -> RXed character
+
+	uartBuf=UCA0RXBUF;
+	intrFlag=1;
 
 	//P1OUT ^= (1<<0x00);
 
