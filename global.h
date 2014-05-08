@@ -8,8 +8,8 @@
 #ifndef GLOBAL_H_
 #define GLOBAL_H_
 
-extern volatile unsigned char uartBuf;
-extern volatile unsigned char intrFlag;
-extern unsigned char deviceID;
+extern volatile unsigned char uartBuf;		//
+extern volatile unsigned char intrFlag;		// Für Datenübergabe aus ISR
+
 
 #endif /* GLOBAL_H_ */
