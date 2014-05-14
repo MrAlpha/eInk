@@ -13,9 +13,9 @@ extern void Grace_init(void);
 
 //========= Globale Variablen deklarationen ===================================
 
-extern volatile unsigned char uartBuf=0;	//
+extern volatile unsigned char uartBuf=0;	// ||
 extern volatile unsigned char intrFlag=0;	// Für Datenübergabe aus ISR
-
+extern volatile unsigned char packageCountdown=0;	// if !=0 it states the number of upcomming packages from the uart to be discarded
 
 
 /*
@@ -25,20 +25,21 @@ int main( void )
 {
 	//************* Funktions deklarationen **************************************************************
 
-	void stateMachine(unsigned char, unsigned char, unsigned char*, unsigned char* );
+	unsigned char stateMachine(unsigned char, unsigned char*, unsigned char* );
 
 	//************* Variablen deklarationen **********************************************************
 
 	//unsigned char state=0;		//Status d. Statemachine
 	unsigned char deviceID=0;
-	unsigned char packageCowntdown=0;	// if !=0 states the number of upcomming packages from the uart to be discarded
+
 	unsigned char operationsID=0;				//buffers OperationsID (last Instruction)
+
+	unsigned char payload=0;
 
 	//************* Zeiger deklarationen **************************************************
 
-	unsigned char *pPgeCdn = &packageCowntdown;
 	unsigned char *pOprID = &operationsID;
-	unsigned char state=0;
+	unsigned char *ppayload =&payload;
 
 
 
@@ -49,7 +50,7 @@ int main( void )
 
     	if(intrFlag==1){
     		intrFlag=0;
-    		stateMachine(state, deviceID, pPgeCdn,pOprID);
+    		stateMachine(deviceID, pOprID, ppayload);
     	}
 
 

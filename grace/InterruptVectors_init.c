@@ -21,6 +21,7 @@
 
 /* USER CODE START (section: InterruptVectors_init_c_prologue) */
 #include "..\global.h"
+#include "..\pinDefine.h"
 
 /* USER CODE END (section: InterruptVectors_init_c_prologue) */
 
@@ -82,10 +83,15 @@ __interrupt void USCI0RX_ISR_HOOK(void)
 	while (!(IFG2 & UCA0TXIFG)); // Poll TXIFG to until set
 	UCA0TXBUF = UCA0RXBUF;       // TX -> RXed character
 
+	if(packageCountdown==0){
 	uartBuf=UCA0RXBUF;
 	intrFlag=1;
+	}
+	else{
+		packageCountdown--;
+	}
 
-	//P1OUT ^= (1<<0x00);
+	//P1OUT ^= (1<<pin0);
 
     /* USER CODE END (section: USCI0RX_ISR_HOOK) */
 }

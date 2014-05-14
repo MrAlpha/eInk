@@ -10,6 +10,7 @@
 
 extern volatile unsigned char uartBuf;		//
 extern volatile unsigned char intrFlag;		// Für Datenübergabe aus ISR
+extern volatile unsigned char packageCountdown;
 
 
 #endif /* GLOBAL_H_ */
