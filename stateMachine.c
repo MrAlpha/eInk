@@ -31,25 +31,34 @@ unsigned char stateMachine(unsigned char deviceID, unsigned char *pOprID, unsign
 		break;
 
 	case 2:
-		*pOprID= uartBuf;		//write received command to operations ID buffer
-		state=3;
+		if (uartBuf==deviceID)		//Address == own Address?
+			state=3;
+		else					//not own address
+			state=201;
+
 		break;
 
 	case 3:
-		if (uartBuf==deviceID)		//Address == own Address?
-			state=4;
-		else if(!(*pOprID & 0XC0)){		//not own address ->check if data will be transmitted
+		*pOprID= uartBuf;		//write received command to operations ID buffer
+		state=4;
+		break;
+						//TOOODOOOOOOO wenn daten dann state 4 sonst 0
+	case 4:
+		*ppayload= uartBuf;
+		P1OUT ^= (1<<pin0);
+		break;
+
+//=======================================================
+		//branch case 2:
+	case 201:
+		if(!(uartBuf & 0XC0)){			//check if data will be transmitted
 			packageCountdown=(*pOprID)& 0x3F; //...if so, write quantity to count-down
 			state=0;
 		}
 		else
 			state=0;
-		break;
 
-	case 4:
-		*ppayload= uartBuf;
-		P1OUT ^= (1<<pin0);
-		break;
+
 	}
 return deviceID;
 }
