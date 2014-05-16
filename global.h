@@ -9,8 +9,11 @@
 #define GLOBAL_H_
 
 extern volatile unsigned char uartBuf;		//
-extern volatile unsigned char intrFlag;		// Für Datenübergabe aus ISR
+extern volatile unsigned char Flag;		// Für Datenübergabe aus ISR
 extern volatile unsigned char packageCountdown;
 
+//========= defines for Flag Word ============================
+#define INCOMING 	(1<<0)
+#define DISCARD		(1<<1)
 
 #endif /* GLOBAL_H_ */

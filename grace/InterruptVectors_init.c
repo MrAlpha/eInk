@@ -83,12 +83,14 @@ __interrupt void USCI0RX_ISR_HOOK(void)
 	while (!(IFG2 & UCA0TXIFG)); // Poll TXIFG to until set
 	UCA0TXBUF = UCA0RXBUF;       // TX -> RXed character
 
-	if(packageCountdown==0){
+	if(!(Flag & DISCARD)){		//wenn TOOODooOOOOO bitoperator fehler suchen
 	uartBuf=UCA0RXBUF;
-	intrFlag=1;
+	Flag|=INCOMING;
 	}
 	else{
 		packageCountdown--;
+		if(!packageCountdown)
+			Flag & ~DISCARD;
 	}
 
 	//P1OUT ^= (1<<pin0);
