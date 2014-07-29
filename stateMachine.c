@@ -6,11 +6,11 @@
  */
 #include <msp430.h>
 
-#include "global.h"
+#include "eInk.h"
 #include "pinDefine.h"
 
 
-unsigned char stateMachine(unsigned char deviceID, unsigned char *pOprID, unsigned char *payload){
+unsigned char stateMachine(unsigned char deviceID, unsigned char *pOprID, unsigned char *payload, unsigned char *packages){
 
 	static unsigned short state=0;
 
@@ -40,19 +40,22 @@ unsigned char stateMachine(unsigned char deviceID, unsigned char *pOprID, unsign
 
 	case 3:
 		*pOprID= uartBuf;		//write received command to operations ID buffer
-		if(!*pOprID & 0xC0){		//if Data will be send
+		if(!(*pOprID & 0xC0)&&((uartBuf& 0x3F))<=01000000){		//if Data will be send and if package count is smaller/equal than 64 (otherwise we leave the array boarders)
 			packageCountdown=(uartBuf)& 0x3F; //...write quantity to count-down
+			*packages=		 (uartBuf)& 0x3F;
 			state=4;
 		}
 		else
 			state=0;
 		break;
 
-	case 4:							//TTToOOOOOOOODDDDDOOOOOO schau ob die indexe hier stimmen
-		*payload++ = uartBuf;		//
+	case 4:
+		payload[(*packages) - packageCountdown] = uartBuf;		//
 		packageCountdown--;
-		if(!packageCountdown)
+		if(!packageCountdown){
+			*packages=0;
 			state=0;
+		}
 
 		break;
 

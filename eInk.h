@@ -16,4 +16,6 @@ extern volatile unsigned char packageCountdown;
 #define INCOMING 	(1<<0)
 #define DISCARD		(1<<1)
 
+
+
 #endif /* GLOBAL_H_ */

@@ -8,5 +8,6 @@
 	<connection value="common/targetdb/connections/TIMSP430-USB.xml"/>
 	<linkerCommandFile value="lnk_msp430g2553.cmd"/>
 	<rts value="libc.a"/>
-	<templateProperties value="id=com.ti.common.project.core.emptyProjectWithMainTemplate_msp430,"/>
+	<templateProperties value="id=com.ti.sdo.grace.example_0,type=rtsc,products=com.ti.sdo.grace;com.ti.mcu.msp430.driverlib,platform=ti.platforms.msp430:$DeviceId$,buildProfile=debug,isHybrid=true,configuroOptions=-Dxdc.cfg.tsort.policy=fast -Dxdc.cfg.gen.metadataFiles=false -Dxdc.cfg.SourceDir.verbose=7 --compileOptions &quot;${COMPILER_FLAGS} &quot;,"/>
+	<isTargetManual value="false"/>
 </projectOptions>

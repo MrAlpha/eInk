@@ -15,7 +15,7 @@
  *  ==== ALL OTHER CHANGES WILL BE OVERWRITTEN WHEN IT IS REGENERATED ====
  *
  *  This file was generated from
- *      D:/Programme/Grace/grace/grace_2_20_02_32/packages/ti/mcu/msp430/csl/system/templates/System_2xx_init.xdt
+ *      D:/Programme/CCS6/grace_3_00_01_59/packages/ti/mcu/msp430/csl/system/templates/System_2xx_init.xdt
  */
 
 #include <msp430.h>

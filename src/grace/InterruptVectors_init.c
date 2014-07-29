@@ -15,13 +15,13 @@
  *  ==== ALL OTHER CHANGES WILL BE OVERWRITTEN WHEN IT IS REGENERATED ====
  *
  *  This file was generated from
- *      D:/Programme/Grace/grace/grace_2_20_02_32/packages/ti/mcu/msp430/csl/interrupt_vectors/InterruptVectors_init.xdt
+ *      D:/Programme/CCS6/grace_3_00_01_59/packages/ti/mcu/msp430/csl/interrupt_vectors/InterruptVectors_init.xdt
  */
 #include <msp430.h>
 
 /* USER CODE START (section: InterruptVectors_init_c_prologue) */
-#include "..\global.h"
-#include "..\pinDefine.h"
+#include <eInk.h>
+#include <pinDefine.h>
 
 /* USER CODE END (section: InterruptVectors_init_c_prologue) */
 
@@ -83,7 +83,7 @@ __interrupt void USCI0RX_ISR_HOOK(void)
 	while (!(IFG2 & UCA0TXIFG)); // Poll TXIFG to until set
 	UCA0TXBUF = UCA0RXBUF;       // TX -> RXed character
 
-	if(!(Flag & DISCARD)){		//wenn TOOODooOOOOO bitoperator fehler suchen
+	if(!(Flag & DISCARD)){
 	uartBuf=UCA0RXBUF;
 	Flag|=INCOMING;
 	}

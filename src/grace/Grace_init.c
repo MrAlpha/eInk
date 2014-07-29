@@ -7,6 +7,7 @@
 extern void GPIO_graceInit(void);
 extern void BCSplus_graceInit(void);
 extern void USCI_A0_graceInit(void);
+extern void USCI_B0_graceInit(void);
 extern void InterruptVectors_graceInit(void);
 extern void System_graceInit(void);
 
@@ -17,14 +18,14 @@ extern void System_graceInit(void);
   /* pragma required to suppress TI warning that #warning is unrecognized */
   #pragma diag_suppress 11
 #endif
-#if __MSP430_HEADER_VERSION__ < 1093
+#if __MSP430_HEADER_VERSION__ < 1121
   #if defined(__TI_COMPILER_VERSION__)
-    #warn The MSP430 headers included may be incompatible with the generated source files.  If the value of __MSP430_HEADER_VERSION__, declared by msp430.h, is less than 1093, please update your version of the msp430 headers.
+    #warn The MSP430 headers included may be incompatible with the generated source files.  If the value of __MSP430_HEADER_VERSION__, declared by msp430.h, is less than 1121, please update your version of the msp430 headers.
   #elif defined(__GNUC__) || defined(__IAR_SYSTEMS_ICC__)
-    #warning The MSP430 headers included may be incompatible with the generated source files.  If the value of __MSP430_HEADER_VERSION__, declared by msp430.h, is less than 1093, please update your version of the msp430 headers.
+    #warning The MSP430 headers included may be incompatible with the generated source files.  If the value of __MSP430_HEADER_VERSION__, declared by msp430.h, is less than 1121, please update your version of the msp430 headers.
   #else
     /* if we can't just warn, resort to ANSI C's #error */
-    #error The MSP430 headers included may be incompatible with the generated source files.  If the value of __MSP430_HEADER_VERSION__, declared by msp430.h, is less than 1093, please update your version of the msp430 headers.
+    #error The MSP430 headers included may be incompatible with the generated source files.  If the value of __MSP430_HEADER_VERSION__, declared by msp430.h, is less than 1121, please update your version of the msp430 headers.
   #endif
 #endif
 #if defined(__TI_COMPILER_VERSION__)
@@ -49,6 +50,9 @@ void Grace_init(void)
 
     /* initialize Config for the MSP430 USCI_A0 */
     USCI_A0_graceInit();
+
+    /* initialize Config for the MSP430 USCI_B0 */
+    USCI_B0_graceInit();
 
     /* initialize Interrupt vector support */
     InterruptVectors_graceInit();
